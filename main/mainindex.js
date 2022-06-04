@@ -56,7 +56,7 @@ class servicios {
  
 
 
-  const mostrarServicios = () => {
+  /*const mostrarServicios = () => {
     let texto = "";
     servicio.forEach((element) => {
       texto += `${element.id}) ${element.nombre}\n`;
@@ -71,7 +71,7 @@ class servicios {
       );
     }
     return seleccion;
-  };
+  };*/
     
   document.querySelector ('h1').textContent = "Bienvenido a Estudio Bozzi y Asociados"
   /*console.log(document.querySelectorAll(".card"));*/
@@ -80,7 +80,7 @@ class servicios {
 
  
 const nombre = document.getElementById("nombre");
-let ingreso = prompt("Bienvenido a Estudio Bozzi, ingrese su nombre")
+let ingreso = prompt("Ingresa tu Nombre")
 nombre.innerText = "Hola " + ingreso
 
 
@@ -134,7 +134,7 @@ if(!ingreso) {
 
 
 
-    const servicioSeleccionado = (id) => {
+    /*const servicioSeleccionado = (id) => {
     console.log(id);
      
     let servicioFind = servicio.find((element) => element.id === id);
@@ -150,7 +150,7 @@ if(!ingreso) {
         servicioSeleccionado(servicioId);
       };
 
-      init();
+      init();*/
  //EVENTO//
 
  /*const buttonEnviar = document.getElementById ("buscar")
@@ -172,4 +172,11 @@ buttonEnviar.addEventListener("click", ()=> {
    //LOCAL STORAGE//
  
     /*localStorage.setItem("lista", JSON.stringify(servicio));*/
-    console.log(localStorage.setItem("lista", JSON.stringify(servicio)));
+   /*console.log(localStorage.setItem("lista", JSON.stringify(servicio)));*/
+
+let entrada2 = prompt("Ingresar codigo de descuento");
+if ((entrada2 == "Bozzi10") || (entrada2 == "BOZZI10")) {
+alert("CORRECTO");
+} else {
+alert("ERROR");
+}

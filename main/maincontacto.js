@@ -164,4 +164,5 @@ buttonEnviar.addEventListener("click", ()=> {
    //LOCAL STORAGE//
  
     /*localStorage.setItem("lista", JSON.stringify(servicio));*/
-    console.log(localStorage.setItem("lista", JSON.stringify(servicio)));
+    /*console.log(localStorage.setItem("lista", JSON.stringify(servicio)));*/
+
