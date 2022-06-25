@@ -1,4 +1,4 @@
-(async() => {
+/*(async() => {
     const {value:prestaciones} = await  swal.fire({
       title: "Bienvenido!",
       text: "Selecciona el servicio que desea consultar",
@@ -28,7 +28,7 @@
           title: `Seleccionaste ${prestaciones}`
         });
        }
-  })()
+  })()*/
   
   
   

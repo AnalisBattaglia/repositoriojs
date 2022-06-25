@@ -5,22 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             nombre: 'Contable',
-            precio: 1500,
+            precio: 8000,
             imagen: "../images/cotizacion1.jpg",
         },
         {
             id: 2,
             nombre: 'Laboral',
-            precio: 2000,
+            precio: 7000,
             imagen: "../images/cotizacion2.jpg",
         },
         {
             id: 3,
             nombre: 'Abono mensual',
-            precio: 3000,
+            precio: 10000,
             imagen: "../images/cotizacion3.jpg",
         },
-        
+        {
+            id: 4,
+            nombre: '¿Como Empezar?',
+            precio: 5000,
+            imagen: "../images/cotizacion4.jpg",
+        },
     ];
 
     let carrito = [];
@@ -31,13 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const DOMbotonVaciar = document.querySelector('#boton-vaciar');
     const miLocalStorage = window.localStorage;
 
+    
     // Funciones
 
     function renderizarProductos() {
         baseDeDatos.forEach((info) => {
             // Estructura
             const miNodo = document.createElement('div');
-            miNodo.classList.add('card', 'col-sm-4');
+            miNodo.classList.add('card', 'col-sm-5');
             // Body
             const miNodoCardBody = document.createElement('div');
             miNodoCardBody.classList.add('card-body');
@@ -56,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Boton 
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-primary');
-            miNodoBoton.textContent = '+';
+            miNodoBoton.textContent = 'Agregar';
             miNodoBoton.setAttribute('marcador', info.id);
             miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
             // Insertar
@@ -73,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     * Evento para añadir un producto al carrito de la compra
     */
     function anyadirProductoAlCarrito(evento) {
-        // Anyadimos el Nodo a nuestro carrito
+        
         carrito.push(evento.target.getAttribute('marcador'))
-        // Actualizamos el carrito 
+        
         renderizarCarrito();
-        // Actualizamos el LocalStorage
+        
         guardarCarritoEnLocalStorage();
     }
 
@@ -87,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         DOMcarrito.textContent = '';
         
         const carritoSinDuplicados = [...new Set(carrito)];
-        // Generamos los Nodos a partir de carrito
+       
         carritoSinDuplicados.forEach((item) => {
          
             const miItem = baseDeDatos.filter((itemBaseDatos) => {
@@ -99,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                
                 return itemId === item ? total += 1 : total;
             }, 0);
-            // Creamos el nodo del item del carrito
+           
             const miNodo = document.createElement('li');
             miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
             miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
@@ -110,11 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
             miBoton.style.marginLeft = '1rem';
             miBoton.dataset.item = item;
             miBoton.addEventListener('click', borrarItemCarrito);
-            // Mezclamos nodos
+            
             miNodo.appendChild(miBoton);
             DOMcarrito.appendChild(miNodo);
         });
-        // Renderizamos el precio total en el HTML
+     
         DOMtotal.textContent = calcularTotal();
     }
 
@@ -139,20 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
      * Calcula el precio total teniendo en cuenta los productos repetidos
      */
     function calcularTotal() {
-        // Recorremos el array del carrito 
+        
         return carrito.reduce((total, item) => {
-            // De cada elemento obtenemos su precio
+            
             const miItem = baseDeDatos.filter((itemBaseDatos) => {
                 return itemBaseDatos.id === parseInt(item);
             });
-            // Los sumamos al total
+           
             return total + miItem[0].precio;
         }, 0).toFixed(2);
     }
 
-    /**
-    * Vaciar el carrito y vuelve a dibujarlo
-    */
     function vaciarCarrito() {
         
         carrito = [];
@@ -162,6 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.clear();
 
     }
+    
+
 
     function guardarCarritoEnLocalStorage () {
         miLocalStorage.setItem('carrito', JSON.stringify(carrito));
@@ -183,3 +188,52 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
     renderizarCarrito();
 });
+
+//Boton comprar
+const btnalerta = document.querySelector("#btnalerta");
+
+
+btnalerta.addEventListener("click", () => {
+const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+
+
+swalWithBootstrapButtons.fire({
+  title: "Estas seguro que deseas comprar?",
+  text: "",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonText: "Si",
+  cancelButtonText: "No",
+  reverseButtons: true,
+})
+.then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+      "Compra exitosa!",    
+    );
+
+  } else if (
+
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      "Cancelado",
+      "Tu pedido fue cancelado",
+      "Error"
+    );
+  }
+});
+
+});
+
+
+
+
+

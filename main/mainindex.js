@@ -8,7 +8,6 @@ class servicios {
     
   }
 
-
   let servicioId;
   let carrito = [];
   const servicio = [];
@@ -17,48 +16,32 @@ class servicios {
   servicio.push(new servicios(3,'Societario',5000));
   servicio.push(new servicios(4,'Laboral',6000));
 
-   
-  
-  const saludar = () => {
-    let nombre = prompt ("Bienvenido a Estudio Bozzi, ingrese su nombre :");
-    while (nombre === "") {
-      nombre = prompt("Bienvenido a Estudio Bozzi, ingrese su nombre :");
-    }
-  };
-  
- 
-    
-  document.querySelector ('h1').textContent = "Bienvenido a Estudio Bozzi y Asociados"
-  /*console.log(document.querySelectorAll(".card"));*/
-  const cardTitle = document.querySelector(".card-title1")
-  /*cardTitle.innerHTML = "<b>¿Como Empezar?</b>"*/
+   // Ingreso de clientes asociados a su usuario 
 
- 
-const nombre = document.getElementById("nombre");
-let ingreso = prompt("Bienvenido a Estudio Bozzi ingresa tu nombre")
-nombre.innerText = "Hola " + ingreso
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("formulario").addEventListener('submit', validarFormulario); 
+});
 
-
-
-
-
-  const lista0 = document.getElementById("servicios0")
-  const button = document.createElement ("button")
-  button.textContent ="Seleccionar"
-  lista0.append(button)
-
-
-
-
-  
- 
-   //LOCAL STORAGE//
- 
-    localStorage.setItem("lista", JSON.stringify(servicio));
-
-let entrada2 = prompt("Ingresar codigo de descuento");
-if ((entrada2 == "Bozzi10") || (entrada2 == "BOZZI10")) {
-alert("CORRECTO");
-} else {
-alert("ERROR");
+function validarFormulario(evento) {
+  evento.preventDefault();
+  let usuario = document.getElementById('usuario').value;
+  if(usuario.length == 0) {
+    alert('No has escrito nada en el usuario');
+    return;
+  }
+  let clave = document.getElementById('clave').value;
+  if (clave.length < 6) {
+    alert('La clave no es valida');
+    return;
+  }
+  Swal.fire({
+    title: "Ingresaste correctamente",
+    icon: "success",
+  });
 }
+
+    
+  document.querySelector ('h2').textContent = "Bienvenido a Estudio Bozzi y Asociados"
+  
+  const cardTitle = document.querySelector(".card-title1")
+ 
